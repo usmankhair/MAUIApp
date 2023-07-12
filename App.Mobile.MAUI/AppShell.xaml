@@ -21,6 +21,10 @@
         <ShellContent Title="Generic Type" 
                      ContentTemplate="{DataTemplate views:GenericType}" />
 
+
+        <ShellContent Title="On Demand View"
+                      ContentTemplate="{DataTemplate views:OnDemandView}"/>
+
     </TabBar>
 
     <!--<TabBar>
