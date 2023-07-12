@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="App.Mobile.MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:App.Mobile.MAUI.Pages"
+    xmlns:views="clr-namespace:App.Mobile.MAUI.Pages">
+
+    <TabBar>
+        <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+        <ShellContent Title="Binding Mode" 
+                     ContentTemplate="{DataTemplate views:BindindModePage}" />
+
+        <ShellContent Title="Custom List View" 
+                     ContentTemplate="{DataTemplate views:CustomListView}" />
+        
+        <ShellContent Title="Generic Type" 
+                     ContentTemplate="{DataTemplate views:GenericType}" />
+
+    </TabBar>
+
+    <!--<TabBar>
+        <ShellContent Title="Stack" 
+                     ContentTemplate="{DataTemplate views:StackLayoutDetails}" />
+        <ShellContent Title="Absolute"
+                     ContentTemplate="{DataTemplate views:AbsoluteLayoutDetails}" />
+        <ShellContent Title="Grid"
+                     ContentTemplate="{DataTemplate views:GridLayoutDetails}" />
+        <ShellContent Title="Flex"
+                     ContentTemplate="{DataTemplate views:FlexLayoutDetails}" />
+    </TabBar>-->
+
+</Shell>

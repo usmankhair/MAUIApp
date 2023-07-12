@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Mobile.MAUI.Pages.MainPage"
+             Title="Home"
+             xmlns:viewmodel="clr-namespace:App.Mobile.MAUI.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             xmlns:local="clr-namespace:App.Mobile.MAUI.Constants">
+
+    <ContentPage.Resources>
+        <Style x:Key="labelRedStyle"
+               TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+
+        <LayoutOptions x:Key="vertOptions"
+                       Alignment="Center" />
+
+        <x:Double x:Key="lblFontSize">24</x:Double>
+
+        <OnPlatform x:Key="btnTextColor"
+                    x:TypeArguments="Color">
+            <On Platform="iOS" Value="Red" />
+            <On Platform="Android" Value="Aqua" />
+            <On Platform="WinUI" Value="#80FF80" />
+        </OnPlatform>
+
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" Default="10">
+            <On Platform="iOS" Value="0,10,0,0" />
+            <On Platform="Android" Value="5,10,10,5" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <Grid RowDefinitions="100,Auto, 100,100, *"
+          ColumnDefinitions=".75*, .25* "
+          ColumnSpacing="10"
+          RowSpacing="10">
+
+        <Image Grid.ColumnSpan="2"
+               Source="dotnet_bot.png"/>
+
+        <Entry Placeholder="Enter Task"
+               Text="{Binding Text}"
+               Grid.Row="1" />
+
+        <Button Text="Add" 
+                Command="{Binding AddCommand}"
+                Grid.Row="1"
+                TextColor="{StaticResource btnTextColor}"
+                Grid.Column="1"/>
+
+        <CollectionView Grid.Row="2" 
+                        Grid.ColumnSpan="2" 
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="None">
+            <!--<CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Apple</x:String>
+                    <x:String>Bananas</x:String>
+                    <x:String>Oranges</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>-->
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" 
+                                       BackgroundColor="Red" 
+                                       Command="{Binding Source={RelativeSource AncestorType= {x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                       CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+
+                        </SwipeView.RightItems>
+                        <Grid Padding="0,5">
+                            <Frame>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                       Command="{Binding Source={RelativeSource AncestorType= {x:Type viewmodel:MainViewModel}}, Path=DetailCommand}"
+                                       CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding .}" FontSize="24"></Label>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- XAML markup extensions -->
+        <Label Grid.Row="3" Text="Style Text" Style="{StaticResource labelRedStyle}"></Label>
+
+        <!-- Use of intrinsic x:static Markup Extension -->
+        <Label Grid.Row="4" Text="Hello, XAML!"
+              TextColor="{x:Static local:AppConstants.BackgroundColor}"
+              BackgroundColor="{x:Static local:AppConstants.ForegroundColor}"
+              FontAttributes="Bold"
+              FontSize="30"
+              HorizontalOptions="Center" />
+
+    </Grid>
+</ContentPage>

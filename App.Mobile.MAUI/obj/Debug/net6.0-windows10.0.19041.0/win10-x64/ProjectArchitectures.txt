@@ -1,0 +1,1 @@
+C:\Users\musma\source\repos\App.Mobile\App.Mobile.MAUI\App.Mobile.MAUI.csproj;x64
