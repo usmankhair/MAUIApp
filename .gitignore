@@ -74,10 +74,12 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.debug
-*.debug/
-*.obj
-*.obj/
+**.obj
+**.bin
+App.Mobile.MAUI/bin
+App.Mobile.MAUI/bin/**
+App.Mobile.MAUI/obj
+App.Mobile.MAUI/obj/**
 *.iobj
 *.pch
 *.pdb
